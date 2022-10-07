@@ -1,0 +1,15 @@
+services:
+  greenflux:
+    build:
+      context: C:\Users\mzaiter\source\repos\GitHub\Development
+      dockerfile: src/GreenFlux.Charging.Service/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://0.0.0.0:3190
+      GREENFLUX_CONNECTIONSTRING: Server=20.241.129.190,1433; Initial Catalog=Test;
+        User ID=sa; Password=P@ssw0rd; TrustServerCertificate=true;
+    image: greenflux
+    ports:
+    - published: 3190
+      target: 3190
+version: '3.4'

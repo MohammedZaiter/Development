@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  greenflux:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:3190
+      - GREENFLUX_CONNECTIONSTRING=Server=20.241.129.190,1433; Initial Catalog=Test; User ID=sa; Password=P@ssw0rd; TrustServerCertificate=true;
+    ports:
+      - "3190:3190"

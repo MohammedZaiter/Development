@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[Stations]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [Name] VARCHAR(30) NOT NULL,
+    [ConsumedCurrent] BIGINT NOT NULL DEFAULT 0,
+    [GroupId] UNIQUEIDENTIFIER NOT NULL, 
+    CONSTRAINT [FK_Stations_Groups] FOREIGN KEY ([GroupId]) REFERENCES [Groups]([Id])
+)

@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  greenflux:
+    image: greenflux
+    build:
+      context: .
+      dockerfile: src/GreenFlux.Charging.Service/Dockerfile
