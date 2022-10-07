@@ -54,3 +54,8 @@ C:\Users\mzaiter\source\repos\GitHub\Development\bin\Debug\GreenFlux.Charging.Ab
 C:\Users\mzaiter\source\repos\GitHub\Development\obj\Debug\docker-compose.dcproj.AssemblyReference.cache
 C:\Users\mzaiter\source\repos\GitHub\Development\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
 C:\Users\mzaiter\source\repos\GitHub\Development\obj\Debug\docker-compose.dcproj.CopyComplete
+C:\Users\mzaiter\source\repos\GitHub\Development\bin\Debug\GreenFlux.Charging.Caching.Redis.dll
+C:\Users\mzaiter\source\repos\GitHub\Development\bin\Debug\StackExchange.Redis.dll
+C:\Users\mzaiter\source\repos\GitHub\Development\bin\Debug\Pipelines.Sockets.Unofficial.dll
+C:\Users\mzaiter\source\repos\GitHub\Development\bin\Debug\System.Diagnostics.PerformanceCounter.dll
+C:\Users\mzaiter\source\repos\GitHub\Development\bin\Debug\GreenFlux.Charging.Caching.Redis.pdb

@@ -1,6 +1,7 @@
 ﻿
 namespace GreenFlux.Charging.Tests
 {
+    using GreenFlux.Charging.Abstractions;
     using GreenFlux.Charging.Groups;
     using Moq;
     using System;
@@ -24,7 +25,7 @@ namespace GreenFlux.Charging.Tests
             mockStationsStore.Setup(e => e.GetStation(guid))
                     .ReturnsAsync(actualStation);
 
-            var manager = new Manager(new Mock<IGroupsStore>().Object, mockStationsStore.Object, new Mock<IConnectorsStore>().Object);
+            var manager = new Manager(new Mock<IGroupsStore>().Object, mockStationsStore.Object, new Mock<IConnectorsStore>().Object, new Mock<ICachingService>().Object);
 
             var station = manager.GetStation(guid).Result;
 
@@ -44,7 +45,7 @@ namespace GreenFlux.Charging.Tests
             mockGraphStore.Setup(e => e.GetGroup(guid))
                     .ReturnsAsync(new Group());
 
-            var manager = new Manager(mockGraphStore.Object, mockStationsStore.Object, new Mock<IConnectorsStore>().Object);
+            var manager = new Manager(mockGraphStore.Object, mockStationsStore.Object, new Mock<IConnectorsStore>().Object, new Mock<ICachingService>().Object);
 
             var result = manager.GetStationsByGroupId(guid).Result;
 
@@ -60,7 +61,7 @@ namespace GreenFlux.Charging.Tests
             mockGraphStore.Setup(e => e.GetGroup(guid))
                     .ReturnsAsync((Group)null);
 
-            var manager = new Manager(mockGraphStore.Object, new Mock<IStationsStore>().Object, new Mock<IConnectorsStore>().Object);
+            var manager = new Manager(mockGraphStore.Object, new Mock<IStationsStore>().Object, new Mock<IConnectorsStore>().Object, new Mock<ICachingService>().Object);
 
             var result = manager.GetStationsByGroupId(guid).Result;
 
@@ -70,7 +71,7 @@ namespace GreenFlux.Charging.Tests
         [Fact]
         public void CreateStationMustThrowExceptionIfOptionsIsNull()
         {
-            var manager = new Manager(new Mock<IGroupsStore>().Object, new Mock<IStationsStore>().Object, new Mock<IConnectorsStore>().Object);
+            var manager = new Manager(new Mock<IGroupsStore>().Object, new Mock<IStationsStore>().Object, new Mock<IConnectorsStore>().Object, new Mock<ICachingService>().Object);
 
             Assert.ThrowsAsync<ArgumentNullException>(() => manager.CreateStation(null));
         }
@@ -84,7 +85,7 @@ namespace GreenFlux.Charging.Tests
             mockGraphStore.Setup(e => e.GetGroup(guid))
                     .ReturnsAsync((Group)null);
 
-            var manager = new Manager(mockGraphStore.Object, new Mock<IStationsStore>().Object, new Mock<IConnectorsStore>().Object);
+            var manager = new Manager(mockGraphStore.Object, new Mock<IStationsStore>().Object, new Mock<IConnectorsStore>().Object, new Mock<ICachingService>().Object);
 
             var result = manager.CreateStation(new CreateOrUpdateStationOptions()).Result;
 
@@ -105,7 +106,7 @@ namespace GreenFlux.Charging.Tests
             mockGraphStore.Setup(e => e.GetGroup(guid))
                     .ReturnsAsync(new Group());
 
-            var manager = new Manager(mockGraphStore.Object, new Mock<IStationsStore>().Object, new Mock<IConnectorsStore>().Object);
+            var manager = new Manager(mockGraphStore.Object, new Mock<IStationsStore>().Object, new Mock<IConnectorsStore>().Object, new Mock<ICachingService>().Object);
 
             var result = manager.CreateStation(options).Result;
 
@@ -115,7 +116,7 @@ namespace GreenFlux.Charging.Tests
         [Fact]
         public void UpdateStationMustThrowExceptionIfOptionsIsNull()
         {
-            var manager = new Manager(new Mock<IGroupsStore>().Object, new Mock<IStationsStore>().Object, new Mock<IConnectorsStore>().Object);
+            var manager = new Manager(new Mock<IGroupsStore>().Object, new Mock<IStationsStore>().Object, new Mock<IConnectorsStore>().Object, new Mock<ICachingService>().Object);
 
             Assert.ThrowsAsync<ArgumentNullException>(() => manager.UpdateStation(It.IsAny<Guid>(), null));
         }
@@ -134,7 +135,7 @@ namespace GreenFlux.Charging.Tests
             mockStationsStore.Setup(e => e.GetStation(guid))
                     .ReturnsAsync((Station)null);
 
-            var manager = new Manager(new Mock<IGroupsStore>().Object, mockStationsStore.Object, new Mock<IConnectorsStore>().Object);
+            var manager = new Manager(new Mock<IGroupsStore>().Object, mockStationsStore.Object, new Mock<IConnectorsStore>().Object, new Mock<ICachingService>().Object);
 
             var result = manager.UpdateStation(It.IsAny<Guid>(), options).Result;
 
@@ -154,7 +155,7 @@ namespace GreenFlux.Charging.Tests
             mockStationsStore.Setup(e => e.GetStation(guid))
                     .ReturnsAsync(new Station());
 
-            var manager = new Manager(mockGraphStore.Object, mockStationsStore.Object, new Mock<IConnectorsStore>().Object);
+            var manager = new Manager(mockGraphStore.Object, mockStationsStore.Object, new Mock<IConnectorsStore>().Object, new Mock<ICachingService>().Object);
 
             var result = manager.UpdateStation(It.IsAny<Guid>(), new CreateOrUpdateStationOptions()).Result;
 
@@ -179,7 +180,7 @@ namespace GreenFlux.Charging.Tests
             mockStationsStore.Setup(e => e.GetStation(guid))
                     .ReturnsAsync(new Station());
 
-            var manager = new Manager(mockGraphStore.Object, mockStationsStore.Object, new Mock<IConnectorsStore>().Object);
+            var manager = new Manager(mockGraphStore.Object, mockStationsStore.Object, new Mock<IConnectorsStore>().Object, new Mock<ICachingService>().Object);
 
             var result = manager.UpdateStation(guid, options).Result;
 
@@ -195,7 +196,7 @@ namespace GreenFlux.Charging.Tests
             mockGraphStore.Setup(e => e.GetGroup(guid))
                     .ReturnsAsync((Group)null);
 
-            var manager = new Manager(mockGraphStore.Object, new Mock<IStationsStore>().Object, new Mock<IConnectorsStore>().Object);
+            var manager = new Manager(mockGraphStore.Object, new Mock<IStationsStore>().Object, new Mock<IConnectorsStore>().Object, new Mock<ICachingService>().Object);
 
             var result = manager.RemoveStation(guid).Result;
 
@@ -211,7 +212,7 @@ namespace GreenFlux.Charging.Tests
             mockStationsStore.Setup(e => e.GetStation(guid))
                     .ReturnsAsync(new Station());
 
-            var manager = new Manager(new Mock<IGroupsStore>().Object, mockStationsStore.Object, new Mock<IConnectorsStore>().Object);
+            var manager = new Manager(new Mock<IGroupsStore>().Object, mockStationsStore.Object, new Mock<IConnectorsStore>().Object, new Mock<ICachingService>().Object);
 
             var result = manager.RemoveStation(guid).Result;
 

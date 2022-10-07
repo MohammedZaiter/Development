@@ -6,3 +6,10 @@ services:
     build:
       context: .
       dockerfile: src/GreenFlux.Charging.Service/Dockerfile
+
+  redis:
+    image: redis:6.2-alpine
+
+volumes:
+    cache:
+    driver:

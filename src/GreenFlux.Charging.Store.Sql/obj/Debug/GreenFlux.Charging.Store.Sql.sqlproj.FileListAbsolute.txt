@@ -11,7 +11,6 @@ C:\Users\mzaiter\source\repos\Charging\src\GreenFlux.Charging.Store.Sql\obj\Debu
 C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Store.Sql\bin\Debug\GreenFlux.Charging.Store.Sql.dacpac
 C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Store.Sql\bin\Debug\GreenFlux.Charging.Store.Sql.dll
 C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Store.Sql\bin\Debug\GreenFlux.Charging.Store.Sql.pdb
-C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Store.Sql\obj\Debug\GreenFlux.Charging.Store.Sql.sqlproj.AssemblyReference.cache
 C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Store.Sql\obj\Debug\Model.xml
 C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Store.Sql\obj\Debug\refactor.xml
 C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Store.Sql\obj\Debug\postdeploy.sql

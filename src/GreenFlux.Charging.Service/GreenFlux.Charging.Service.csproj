@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GreenFlux.Charging.Caching.Redis\GreenFlux.Charging.Caching.Redis.csproj" />
     <ProjectReference Include="..\GreenFlux.Charging.Groups.WebApi\GreenFlux.Charging.Groups.WebApi.csproj" />
     <ProjectReference Include="..\GreenFlux.Charging.Groups\GreenFlux.Charging.Groups.csproj" />
   </ItemGroup>

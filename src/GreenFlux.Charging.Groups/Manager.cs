@@ -10,14 +10,17 @@ namespace GreenFlux.Charging.Groups
         private readonly IGroupsStore groupsStore;
         private readonly IStationsStore stationsStore;
         private readonly IConnectorsStore connectorsStore;
+        private readonly ICachingService cachingService;
 
         public Manager(
             IGroupsStore groupsStore,
             IStationsStore stationsStore,
-            IConnectorsStore connectorsStore)
+            IConnectorsStore connectorsStore,
+            ICachingService cachingService)
         {
             this.groupsStore = groupsStore ?? throw new ArgumentNullException(nameof(groupsStore));
             this.connectorsStore = connectorsStore ?? throw new ArgumentNullException(nameof(stationsStore));
+            this.cachingService = cachingService ?? throw new ArgumentNullException(nameof(cachingService));
             this.stationsStore = stationsStore ?? throw new ArgumentNullException(nameof(stationsStore));
         }
 
@@ -67,6 +70,11 @@ namespace GreenFlux.Charging.Groups
             await this.groupsStore.RemoveGroup(id);
 
             return ReturnResult.SuccessResult;
+        }
+
+        private string GetGroupConsumedCurrentKey(Guid groupId)
+        {
+            return $"Groups:{groupId}:ConsumedCurrent";
         }
     }
 }

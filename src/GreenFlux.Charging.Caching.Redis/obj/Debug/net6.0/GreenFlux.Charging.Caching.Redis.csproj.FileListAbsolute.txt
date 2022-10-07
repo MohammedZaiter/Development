@@ -1,0 +1,15 @@
+C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Caching.Redis\bin\Debug\net6.0\GreenFlux.Charging.Caching.Redis.deps.json
+C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Caching.Redis\bin\Debug\net6.0\GreenFlux.Charging.Caching.Redis.dll
+C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Caching.Redis\bin\Debug\net6.0\ref\GreenFlux.Charging.Caching.Redis.dll
+C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Caching.Redis\bin\Debug\net6.0\GreenFlux.Charging.Caching.Redis.pdb
+C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Caching.Redis\bin\Debug\net6.0\GreenFlux.Charging.Abstractions.dll
+C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Caching.Redis\bin\Debug\net6.0\GreenFlux.Charging.Abstractions.pdb
+C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Caching.Redis\obj\Debug\net6.0\GreenFlux.Charging.Caching.Redis.csproj.AssemblyReference.cache
+C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Caching.Redis\obj\Debug\net6.0\GreenFlux.Charging.Caching.Redis.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Caching.Redis\obj\Debug\net6.0\GreenFlux.Charging.Caching.Redis.AssemblyInfoInputs.cache
+C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Caching.Redis\obj\Debug\net6.0\GreenFlux.Charging.Caching.Redis.AssemblyInfo.cs
+C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Caching.Redis\obj\Debug\net6.0\GreenFlux.Charging.Caching.Redis.csproj.CoreCompileInputs.cache
+C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Caching.Redis\obj\Debug\net6.0\GreenFlux.Charging.Caching.Redis.csproj.CopyComplete
+C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Caching.Redis\obj\Debug\net6.0\GreenFlux.Charging.Caching.Redis.dll
+C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Caching.Redis\obj\Debug\net6.0\ref\GreenFlux.Charging.Caching.Redis.dll
+C:\Users\mzaiter\source\repos\GitHub\Development\src\GreenFlux.Charging.Caching.Redis\obj\Debug\net6.0\GreenFlux.Charging.Caching.Redis.pdb

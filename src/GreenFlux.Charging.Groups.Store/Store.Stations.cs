@@ -113,9 +113,7 @@ namespace GreenFlux.Charging.Groups.Store
         {
             var con = await this.connectionManager.GetConnection();
 
-            using var transaction = await con.BeginTransactionAsync(IsolationLevel.Serializable);
-
-            using var updateStationCmd = new SqlCommand("usp_UpdateStation", con, (SqlTransaction)transaction)
+            using var updateStationCmd = new SqlCommand("usp_UpdateStation", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
@@ -127,21 +125,10 @@ namespace GreenFlux.Charging.Groups.Store
             try
             {
                 await updateStationCmd.ExecuteNonQueryAsync();
-
-                if (options.GroupId != oldGroupId)
-                {
-                    await this.UpdateGroupCurrent(oldGroupId, 0, stationCurrent, (SqlTransaction)transaction, con);
-
-                    await this.UpdateGroupCurrent(options.GroupId, stationCurrent, 0, (SqlTransaction)transaction, con);
-                }
-
-                await transaction.CommitAsync();
             }
 
             catch (Exception ex)
             {
-                await transaction.RollbackAsync();
-
                 this.logger.LogError(ex, "An error occured while executing UpdateStation");
 
                 throw;
@@ -152,9 +139,7 @@ namespace GreenFlux.Charging.Groups.Store
         {
             var con = await this.connectionManager.GetConnection();
 
-            using var transaction = await con.BeginTransactionAsync(IsolationLevel.Serializable);
-
-            using var removeStationCmd = new SqlCommand("usp_RemoveStation", con, (SqlTransaction)transaction)
+            using var removeStationCmd = new SqlCommand("usp_RemoveStation", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
@@ -164,38 +149,14 @@ namespace GreenFlux.Charging.Groups.Store
             try
             {
                 await removeStationCmd.ExecuteNonQueryAsync();
-
-                await this.UpdateGroupCurrent(groupId, 0, stationCurrent, (SqlTransaction)transaction, con);
-
-                await transaction.CommitAsync();
             }
 
             catch (Exception ex)
             {
-                await transaction.RollbackAsync();
-
                 this.logger.LogError(ex, "An error occured while executing RemoveStation");
 
                 throw;
             }
-        }
-
-        private async Task UpdateStationCurrent(Guid stationId,
-            long addedCurrent,
-            long subtractedCurrent,
-            SqlTransaction transaction,
-            SqlConnection con)
-        {
-            using var updateStationCurrentCmd = new SqlCommand("usp_UpdateStationCurrent", con, (SqlTransaction)transaction)
-            {
-                CommandType = CommandType.StoredProcedure
-            };
-
-            _ = updateStationCurrentCmd.Parameters.AddWithValue("@id", stationId);
-            _ = updateStationCurrentCmd.Parameters.AddWithValue("@addedCurrent", addedCurrent);
-            _ = updateStationCurrentCmd.Parameters.AddWithValue("@subtractedCurrent", subtractedCurrent);
-
-            await updateStationCurrentCmd.ExecuteNonQueryAsync();
         }
 
         private Station StationFromReader(SqlDataReader reader)

@@ -1,0 +1,28 @@
+services:
+  greenflux:
+    build:
+      context: C:\Users\mzaiter\source\repos\GitHub\Development
+      dockerfile: src/GreenFlux.Charging.Service/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://0.0.0.0:3190
+      GREENFLUX_CONNECTIONSTRING: Server=20.241.129.190,1433; Initial Catalog=Test;
+        User ID=sa; Password=P@ssw0rd; TrustServerCertificate=true;
+      REDIS_CONNECTIONSTRING: http://localhost:6379
+    image: greenflux
+    ports:
+    - published: 3190
+      target: 3190
+  redis:
+    environment:
+      ALLOW_EMPTY_PASSWORD: "yes"
+    image: redis:6.2-alpine
+    ports:
+    - published: 6379
+      target: 6379
+    volumes:
+    - cache:/data:rw
+version: '3.4'
+volumes:
+  cache: {}
+  driver: {}

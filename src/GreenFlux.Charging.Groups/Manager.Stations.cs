@@ -67,6 +67,17 @@ namespace GreenFlux.Charging.Groups
 
             await this.stationsStore.UpdateStation(stationId, station.GroupId, station.ConsumedCurrent, options);
 
+            if (station.GroupId != options.GroupId)
+            {
+                var stationCureent = await this.cachingService.Get<long>(this.GetStationConsumedCurrentKey(stationId));
+
+                await Task.WhenAll(new Task[]
+                {
+                     this.cachingService.Increment(this.GetGroupConsumedCurrentKey(options.GroupId), stationCureent),
+                     this.cachingService.Decrement(this.GetGroupConsumedCurrentKey(station.GroupId), stationCureent)
+                });
+            }
+
             return ReturnResult.SuccessResult;
         }
 
@@ -79,9 +90,22 @@ namespace GreenFlux.Charging.Groups
                 return ReturnResult.ErrorResult("STATION_NOT_FOUND", $"Station matching id {stationId} is not found.");
             }
 
-            await this.stationsStore.RemoveStation(station.GroupId, stationId, station.ConsumedCurrent);
+
+            var stationCureent = await this.cachingService.Get<long>(this.GetStationConsumedCurrentKey(stationId));
+
+            await Task.WhenAll(new Task[]
+            {
+                this.stationsStore.RemoveStation(station.GroupId, stationId, station.ConsumedCurrent),
+                this.cachingService.Decrement(this.GetGroupConsumedCurrentKey(station.GroupId), stationCureent),
+                this.cachingService.Delete(this.GetStationConsumedCurrentKey(stationId))
+            });
 
             return ReturnResult.SuccessResult;
+        }
+
+        private string GetStationConsumedCurrentKey(Guid stationId)
+        {
+            return $"Stations:{stationId}:ConsumedCurrent";
         }
     }
 }

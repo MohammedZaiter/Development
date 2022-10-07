@@ -84,9 +84,7 @@ namespace GreenFlux.Charging.Groups.Store
         {
             var con = await this.connectionManager.GetConnection();
 
-            using var transaction = await con.BeginTransactionAsync(IsolationLevel.Serializable);
-
-            using var createConnectorCmd = new SqlCommand("usp_CreateConnector", con, (SqlTransaction)transaction)
+            using var createConnectorCmd = new SqlCommand("usp_CreateConnector", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
@@ -98,18 +96,10 @@ namespace GreenFlux.Charging.Groups.Store
             try
             {
                 await createConnectorCmd.ExecuteNonQueryAsync();
-
-                await this.UpdateStationCurrent(options.StationId, options.MaxCurrent, 0, (SqlTransaction)transaction, con);
-
-                await this.UpdateGroupCurrent(groupId, options.MaxCurrent, 0, (SqlTransaction)transaction, con);
-
-                await transaction.CommitAsync();
             }
 
             catch (Exception ex)
             {
-                await transaction.RollbackAsync();
-
                 this.logger.LogError(ex, "An error occured while executing CreateConnector");
 
                 throw;
@@ -120,9 +110,7 @@ namespace GreenFlux.Charging.Groups.Store
         {
             var con = await this.connectionManager.GetConnection();
 
-            using var transaction = await con.BeginTransactionAsync(IsolationLevel.Serializable);
-
-            using var updateConnectorCmd = new SqlCommand("usp_UpdateConnectorCurrent", con, (SqlTransaction)transaction)
+            using var updateConnectorCmd = new SqlCommand("usp_UpdateConnectorCurrent", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
@@ -135,18 +123,10 @@ namespace GreenFlux.Charging.Groups.Store
             try
             {
                 await updateConnectorCmd.ExecuteNonQueryAsync();
-
-                await this.UpdateStationCurrent(options.StationId, options.MaxCurrent, oldCurrent, (SqlTransaction)transaction, con);
-
-                await this.UpdateGroupCurrent(groupId, options.MaxCurrent, oldCurrent, (SqlTransaction)transaction, con);
-
-                await transaction.CommitAsync();
             }
 
             catch (Exception ex)
             {
-                await transaction.RollbackAsync();
-
                 this.logger.LogError(ex, "An error occured while executing UpdateConnectorCurrent");
 
                 throw;
@@ -157,9 +137,7 @@ namespace GreenFlux.Charging.Groups.Store
         {
             var con = await this.connectionManager.GetConnection();
 
-            using var transaction = await con.BeginTransactionAsync(IsolationLevel.Serializable);
-
-            using var removeConnectorCmd = new SqlCommand("usp_RemoveConnector", con, (SqlTransaction)transaction)
+            using var removeConnectorCmd = new SqlCommand("usp_RemoveConnector", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
@@ -170,18 +148,10 @@ namespace GreenFlux.Charging.Groups.Store
             try
             {
                 await removeConnectorCmd.ExecuteNonQueryAsync();
-
-                await this.UpdateStationCurrent(stationId, 0, oldCurrent, (SqlTransaction)transaction, con);
-
-                await this.UpdateGroupCurrent(groupId, 0, oldCurrent, (SqlTransaction)transaction, con);
-
-                await transaction.CommitAsync();
             }
 
             catch (Exception ex)
             {
-                await transaction.RollbackAsync();
-
                 this.logger.LogError(ex, "An error occured while executing RemoveConnector");
 
                 throw;

@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   greenflux:
-    container_name: GreenFlux.Charging.Service
+    container_name: GreenFlux.Charging.Service_1
     build:
       labels:
         com.microsoft.created-by: "visual-studio"

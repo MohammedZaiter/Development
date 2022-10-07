@@ -1,0 +1,39 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[Connectors] (Table)
+       [dbo].[Groups] (Table)
+       [dbo].[Stations] (Table)
+       Default Constraint: unnamed constraint on [dbo].[Groups] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Stations] (Default Constraint)
+       [dbo].[FK_Connectors_Stations] (Foreign Key)
+       [dbo].[FK_Stations_Groups] (Foreign Key)
+       [dbo].[CK_Connectors_MaxCurrent] (Check Constraint)
+       [dbo].[CK_Groups_Column] (Check Constraint)
+       [dbo].[usp_CreateConnector] (Procedure)
+       [dbo].[usp_CreateGroup] (Procedure)
+       [dbo].[usp_CreateStation] (Procedure)
+       [dbo].[usp_GetConnectorByIdentifier] (Procedure)
+       [dbo].[usp_GetConnectorsByStationId] (Procedure)
+       [dbo].[usp_GetGroupById] (Procedure)
+       [dbo].[usp_GetStationById] (Procedure)
+       [dbo].[usp_GetStationsByGroupId] (Procedure)
+       [dbo].[usp_RemoveConnector] (Procedure)
+       [dbo].[usp_RemoveGroup] (Procedure)
+       [dbo].[usp_RemoveStation] (Procedure)
+       [dbo].[usp_UpdateConnectorCurrent] (Procedure)
+       [dbo].[usp_UpdateGroup] (Procedure)
+       [dbo].[usp_UpdateGroupCurrent] (Procedure)
+       [dbo].[usp_UpdateStation] (Procedure)
+       [dbo].[usp_UpdateStationCurrent] (Procedure)
+
+** Supporting actions

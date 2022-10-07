@@ -124,12 +124,12 @@ C:\Users\mzaiter\source\repos\src\test\GreenFlux.Charging.Tests\obj\Debug\net6.0
 C:\Users\mzaiter\source\repos\src\test\GreenFlux.Charging.Tests\obj\Debug\net6.0\GreenFlux.Charging.Tests.pdb
 C:\Users\mzaiter\source\repos\src\test\GreenFlux.Charging.Tests\obj\Debug\net6.0\GreenFlux.Charging.Tests.genruntimeconfig.cache
 C:\Users\mzaiter\source\repos\GitHub\Development\src\test\GreenFlux.Charging.Tests\bin\Debug\net6.0\CoverletSourceRootsMapping
-C:\Users\mzaiter\source\repos\GitHub\Development\src\test\GreenFlux.Charging.Tests\bin\Debug\net6.0\testhost.exe
 C:\Users\mzaiter\source\repos\GitHub\Development\src\test\GreenFlux.Charging.Tests\bin\Debug\net6.0\testhost.dll
+C:\Users\mzaiter\source\repos\GitHub\Development\src\test\GreenFlux.Charging.Tests\bin\Debug\net6.0\testhost.exe
+C:\Users\mzaiter\source\repos\GitHub\Development\src\test\GreenFlux.Charging.Tests\bin\Debug\net6.0\Microsoft.TestPlatform.PlatformAbstractions.dll
 C:\Users\mzaiter\source\repos\GitHub\Development\src\test\GreenFlux.Charging.Tests\bin\Debug\net6.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
 C:\Users\mzaiter\source\repos\GitHub\Development\src\test\GreenFlux.Charging.Tests\bin\Debug\net6.0\xunit.runner.reporters.netcoreapp10.dll
 C:\Users\mzaiter\source\repos\GitHub\Development\src\test\GreenFlux.Charging.Tests\bin\Debug\net6.0\xunit.runner.utility.netcoreapp10.dll
-C:\Users\mzaiter\source\repos\GitHub\Development\src\test\GreenFlux.Charging.Tests\bin\Debug\net6.0\Microsoft.TestPlatform.PlatformAbstractions.dll
 C:\Users\mzaiter\source\repos\GitHub\Development\src\test\GreenFlux.Charging.Tests\bin\Debug\net6.0\GreenFlux.Charging.Tests.deps.json
 C:\Users\mzaiter\source\repos\GitHub\Development\src\test\GreenFlux.Charging.Tests\bin\Debug\net6.0\GreenFlux.Charging.Tests.runtimeconfig.json
 C:\Users\mzaiter\source\repos\GitHub\Development\src\test\GreenFlux.Charging.Tests\bin\Debug\net6.0\GreenFlux.Charging.Tests.dll

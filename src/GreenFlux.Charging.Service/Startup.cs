@@ -1,6 +1,7 @@
 ﻿
 namespace Charging.Group.Service
 {
+    using GreenFlux.Charging.Caching.Redis;
     using GreenFlux.Charging.Store;
     using Microsoft.AspNetCore.Diagnostics.HealthChecks;
     using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -37,6 +38,12 @@ namespace Charging.Group.Service
             services
                 .AddServices()
                 .AddStore(storeOptions);
+
+            var cacheConnectionString = this.Configuration["REDIS_CONNECTIONSTRING"];
+
+            services
+                .AddDistributedMemoryCache()
+                .AddCaching(cacheConnectionString);
 
             if (this.WebHostEnvironment.IsDevelopment())
             {

@@ -131,24 +131,6 @@ namespace GreenFlux.Charging.Groups.Store
             }
         }
 
-        private async Task UpdateGroupCurrent(Guid groupId,
-            long addedCurrent,
-            long subtractedCurrent,
-            SqlTransaction transaction,
-            SqlConnection con)
-        {
-            using var updateStationCurrentCmd = new SqlCommand("usp_UpdateGroupCurrent", con, (SqlTransaction)transaction)
-            {
-                CommandType = CommandType.StoredProcedure
-            };
-
-            _ = updateStationCurrentCmd.Parameters.AddWithValue("@id", groupId);
-            _ = updateStationCurrentCmd.Parameters.AddWithValue("@addedCurrent", addedCurrent);
-            _ = updateStationCurrentCmd.Parameters.AddWithValue("@subtractedCurrent", subtractedCurrent);
-
-            await updateStationCurrentCmd.ExecuteNonQueryAsync();
-        }
-
         private Group GroupFromReader(SqlDataReader reader)
         {
             return new Group()
