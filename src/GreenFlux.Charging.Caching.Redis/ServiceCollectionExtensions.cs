@@ -6,6 +6,12 @@ namespace GreenFlux.Charging.Caching.Redis
 
     public static class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// Register caching services.
+        /// </summary>
+        /// <param name="services">The services.</param>
+        /// <param name="connectionString">The connection string.</param>
+        /// <returns></returns>
         public static IServiceCollection AddCaching(this IServiceCollection services, string connectionString)
         {
             return services

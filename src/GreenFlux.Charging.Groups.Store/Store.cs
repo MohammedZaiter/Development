@@ -8,6 +8,13 @@ namespace GreenFlux.Charging.Groups.Store
     using System.Data.SqlClient;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Store class that encapsulates database operations layer for Groups.
+    /// </summary>
+    /// <seealso cref="GreenFlux.Charging.Store.DataStore" />
+    /// <seealso cref="GreenFlux.Charging.Groups.IConnectorsStore" />
+    /// <seealso cref="GreenFlux.Charging.Groups.IGroupsStore" />
+    /// <seealso cref="GreenFlux.Charging.Groups.IStationsStore" />
     public partial class Store : DataStore, IGroupsStore
     {
         private readonly ILogger<Store> logger;
@@ -17,6 +24,11 @@ namespace GreenFlux.Charging.Groups.Store
             this.logger = logger;
         }
 
+        /// <summary>
+        /// Gets the group.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public async Task<Group> GetGroup(Guid id)
         {
             var con = await this.connectionManager.GetConnection();
@@ -51,6 +63,11 @@ namespace GreenFlux.Charging.Groups.Store
             }
         }
 
+        /// <summary>
+        /// Creates the group.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns></returns>
         public async Task<Guid> CreateGroup(CreateOrUpdateGroupOptions options)
         {
             var con = await this.connectionManager.GetConnection();
@@ -81,6 +98,11 @@ namespace GreenFlux.Charging.Groups.Store
             }
         }
 
+        /// <summary>
+        /// Updates the group.
+        /// </summary>
+        /// <param name="groupId">The group identifier.</param>
+        /// <param name="options">The options.</param>
         public async Task UpdateGroup(Guid groupId, CreateOrUpdateGroupOptions options)
         {
             var con = await this.connectionManager.GetConnection();
@@ -107,6 +129,10 @@ namespace GreenFlux.Charging.Groups.Store
             }
         }
 
+        /// <summary>
+        /// Removes the group.
+        /// </summary>
+        /// <param name="groupId">The group identifier.</param>
         public async Task RemoveGroup(Guid groupId)
         {
             var con = await this.connectionManager.GetConnection();
@@ -131,14 +157,18 @@ namespace GreenFlux.Charging.Groups.Store
             }
         }
 
+        /// <summary>
+        /// Read Group from reader.
+        /// </summary>
+        /// <param name="reader">The reader.</param>
+        /// <returns></returns>
         private Group GroupFromReader(SqlDataReader reader)
         {
             return new Group()
             {
                 Id = SafeCast<Guid>(reader["Id"]),
                 Name = SafeCast<string>(reader["Name"]),
-                Capacity = SafeCast<long>(reader["Capacity"]),
-                ConsumedCapacity = SafeCast<long>(reader["ConsumedCapacity"])
+                Capacity = SafeCast<long>(reader["Capacity"])
             };
         }
     }

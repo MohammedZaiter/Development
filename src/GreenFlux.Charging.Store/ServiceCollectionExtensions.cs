@@ -5,6 +5,12 @@ namespace Microsoft.Extensions.DependencyInjection
 
     public static class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// Register store services.
+        /// </summary>
+        /// <param name="services">The services.</param>
+        /// <param name="options">The options.</param>
+        /// <returns></returns>
         public static IServiceCollection AddStore(this IServiceCollection services, DataStoreOptions options)
         {
             return services

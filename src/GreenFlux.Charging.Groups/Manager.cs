@@ -5,6 +5,12 @@ namespace GreenFlux.Charging.Groups
     using System;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Manager class encapsulate the business rules for Groups.
+    /// </summary>
+    /// <seealso cref="GreenFlux.Charging.Groups.IConnectorsManager" />
+    /// <seealso cref="GreenFlux.Charging.Groups.IGroupsManager" />
+    /// <seealso cref="GreenFlux.Charging.Groups.IStationsManager" />
     public sealed partial class Manager : IGroupsManager
     {
         private readonly IGroupsStore groupsStore;
@@ -24,11 +30,22 @@ namespace GreenFlux.Charging.Groups
             this.stationsStore = stationsStore ?? throw new ArgumentNullException(nameof(stationsStore));
         }
 
+        /// <summary>
+        /// Gets the group by id.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public async Task<ReturnResult<Group>> GetGroupById(Guid id)
         {
             return ReturnResult<Group>.SuccessResult(await this.groupsStore.GetGroup(id));
         }
 
+        /// <summary>
+        /// Creates the group.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">options</exception>
         public Task<Guid> CreateGroup(CreateOrUpdateGroupOptions options)
         {
             if (options == null)
@@ -39,6 +56,13 @@ namespace GreenFlux.Charging.Groups
             return this.groupsStore.CreateGroup(options);
         }
 
+        /// <summary>
+        /// Updates the group.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="options">The options.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">options</exception>
         public async Task<ReturnResult> UpdateGroup(Guid id, CreateOrUpdateGroupOptions options)
         {
             if (options == null)
@@ -58,6 +82,11 @@ namespace GreenFlux.Charging.Groups
             return ReturnResult.SuccessResult;
         }
 
+        /// <summary>
+        /// Removes the group.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public async Task<ReturnResult> RemoveGroup(Guid id)
         {
             var group = await this.groupsStore.GetGroup(id);
@@ -72,6 +101,11 @@ namespace GreenFlux.Charging.Groups
             return ReturnResult.SuccessResult;
         }
 
+        /// <summary>
+        /// Gets the group cache consumed current key.
+        /// </summary>
+        /// <param name="groupId">The group identifier.</param>
+        /// <returns></returns>
         private string GetGroupConsumedCurrentKey(Guid groupId)
         {
             return $"Groups:{groupId}:ConsumedCurrent";

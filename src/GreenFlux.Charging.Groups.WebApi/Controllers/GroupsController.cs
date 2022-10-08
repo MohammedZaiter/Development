@@ -19,6 +19,11 @@ namespace GreenFlux.Charging.Group.WebApi
             this.stationsManager = stationsManager ?? throw new ArgumentNullException(nameof(stationsManager));
         }
 
+        /// <summary>
+        /// Gets the group.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("groups/{id}")]
         [ProducesResponseType(200, Type = typeof(Group))]
@@ -37,6 +42,12 @@ namespace GreenFlux.Charging.Group.WebApi
             return Ok(result.Result);
         }
 
+        /// <summary>
+        /// Creates the group.
+        /// </summary>
+        /// <param name="createModel">The create model.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">createModel</exception>
         [HttpPost]
         [Route("groups")]
         [ProducesResponseType(200, Type = typeof(Guid))]
@@ -53,6 +64,13 @@ namespace GreenFlux.Charging.Group.WebApi
             return Ok(groupId);
         }
 
+        /// <summary>
+        /// Updates the group.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="updateModel">The update model.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">updateModel</exception>
         [HttpPut]
         [Route("groups/{id}")]
         [ProducesResponseType(200, Type = typeof(void))]
@@ -76,6 +94,11 @@ namespace GreenFlux.Charging.Group.WebApi
             return Ok();
         }
 
+        /// <summary>
+        /// Removes the group.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("groups/{id}")]
         [ProducesResponseType(200, Type = typeof(void))]
@@ -94,6 +117,11 @@ namespace GreenFlux.Charging.Group.WebApi
             return Ok();
         }
 
+        /// <summary>
+        /// Gets the stations by group identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("groups/{id}/stations")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Station>))]
@@ -112,6 +140,12 @@ namespace GreenFlux.Charging.Group.WebApi
             return Ok(result.Result);
         }
 
+        /// <summary>
+        /// Creates the station.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="name">The name.</param>
+        /// <returns></returns>
         [HttpPost]
         [Route("groups/{id}/stations")]
         [ProducesResponseType(200, Type = typeof(Guid))]

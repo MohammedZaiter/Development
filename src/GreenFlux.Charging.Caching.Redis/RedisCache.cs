@@ -7,6 +7,9 @@ namespace GreenFlux.Charging.Caching.Redis
     using System.Text.Json;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Redis cache class that encapsulates cache operations.
+    /// </summary>
     public sealed class RedisCache : ICachingService
     {
         private readonly IConnectionMultiplexer connectionMultiplexer;
@@ -17,6 +20,12 @@ namespace GreenFlux.Charging.Caching.Redis
             this.connectionMultiplexer = ConnectionMultiplexer.Connect(connectionString);
         }
 
+        /// <summary>
+        /// Keys the exists.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">key</exception>
         public async Task<bool> KeyExists(string key)
         {
             if (key == null)
@@ -29,6 +38,13 @@ namespace GreenFlux.Charging.Caching.Redis
             return await db.KeyExistsAsync($"{instance}:{key}");
         }
 
+        /// <summary>
+        /// Gets the specified key.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key">The key.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">key</exception>
         public async Task<T> Get<T>(string key)
         {
             if (key == null)
@@ -52,6 +68,12 @@ namespace GreenFlux.Charging.Caching.Redis
             return JsonSerializer.Deserialize<T>(await db.StringGetAsync(key));
         }
 
+        /// <summary>
+        /// Increments the specified key.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="value">The value.</param>
+        /// <exception cref="System.ArgumentNullException">key</exception>
         public async Task Increment(string key, long value)
         {
             if (key == null)
@@ -64,6 +86,12 @@ namespace GreenFlux.Charging.Caching.Redis
             await db.StringIncrementAsync(key, value);
         }
 
+        /// <summary>
+        /// Decrements the specified key.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="value">The value.</param>
+        /// <exception cref="System.ArgumentNullException">key</exception>
         public async Task Decrement(string key, long value)
         {
             if (key == null)
@@ -76,6 +104,12 @@ namespace GreenFlux.Charging.Caching.Redis
             await db.StringDecrementAsync(key, value);
         }
 
+        /// <summary>
+        /// Deletes the specified key.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">key</exception>
         public Task Delete(string key)
         {
             if (key == null)
@@ -88,6 +122,10 @@ namespace GreenFlux.Charging.Caching.Redis
             return db.KeyDeleteAsync(key, CommandFlags.FireAndForget);
         }
 
+        /// <summary>
+        /// Gets the database.
+        /// </summary>
+        /// <returns></returns>
         private IDatabase GetDatabase()
         {
             return this.connectionMultiplexer.GetDatabase();

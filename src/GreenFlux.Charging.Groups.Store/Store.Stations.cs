@@ -9,8 +9,20 @@ namespace GreenFlux.Charging.Groups.Store
     using System.Data.SqlClient;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Store class that encapsulates database operations layer for Stations.
+    /// </summary>
+    /// <seealso cref="GreenFlux.Charging.Store.DataStore" />
+    /// <seealso cref="GreenFlux.Charging.Groups.IConnectorsStore" />
+    /// <seealso cref="GreenFlux.Charging.Groups.IGroupsStore" />
+    /// <seealso cref="GreenFlux.Charging.Groups.IStationsStore" />
     public partial class Store : DataStore, IStationsStore
     {
+        /// <summary>
+        /// Gets the station.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public async Task<Station> GetStation(Guid id)
         {
             var con = await this.connectionManager.GetConnection();
@@ -44,6 +56,11 @@ namespace GreenFlux.Charging.Groups.Store
             }
         }
 
+        /// <summary>
+        /// Gets the stations by group identifier.
+        /// </summary>
+        /// <param name="groupId">The group identifier.</param>
+        /// <returns></returns>
         public async Task<IEnumerable<Station>> GetStationsByGroupId(Guid groupId)
         {
             var con = await this.connectionManager.GetConnection();
@@ -79,6 +96,11 @@ namespace GreenFlux.Charging.Groups.Store
             }
         }
 
+        /// <summary>
+        /// Creates the station.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns></returns>
         public async Task<Guid> CreateStation(CreateOrUpdateStationOptions options)
         {
             var con = await this.connectionManager.GetConnection();
@@ -109,7 +131,12 @@ namespace GreenFlux.Charging.Groups.Store
             }
         }
 
-        public async Task UpdateStation(Guid id, Guid oldGroupId, long stationCurrent, CreateOrUpdateStationOptions options)
+        /// <summary>
+        /// Updates the station.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="options">The options.</param>
+        public async Task UpdateStation(Guid id, CreateOrUpdateStationOptions options)
         {
             var con = await this.connectionManager.GetConnection();
 
@@ -135,7 +162,11 @@ namespace GreenFlux.Charging.Groups.Store
             }
         }
 
-        public async Task RemoveStation(Guid groupId, Guid id, long stationCurrent)
+        /// <summary>
+        /// Removes the station.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        public async Task RemoveStation(Guid id)
         {
             var con = await this.connectionManager.GetConnection();
 
@@ -159,14 +190,18 @@ namespace GreenFlux.Charging.Groups.Store
             }
         }
 
+        /// <summary>
+        /// Read Station from reader.
+        /// </summary>
+        /// <param name="reader">The reader.</param>
+        /// <returns></returns>
         private Station StationFromReader(SqlDataReader reader)
         {
             return new Station()
             {
                 Id = SafeCast<Guid>(reader["Id"]),
                 Name = SafeCast<string>(reader["Name"]),
-                GroupId = SafeCast<Guid>(reader["GroupId"]),
-                ConsumedCurrent = SafeCast<long>(reader["ConsumedCurrent"])
+                GroupId = SafeCast<Guid>(reader["GroupId"])
             };
         }
     }

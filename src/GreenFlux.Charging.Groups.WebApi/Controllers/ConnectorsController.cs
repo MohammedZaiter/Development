@@ -15,6 +15,11 @@ namespace GreenFlux.Charging.Group.WebApi
             this.connectorsManager = connectorsManager ?? throw new ArgumentNullException(nameof(connectorsManager));
         }
 
+        /// <summary>
+        /// Gets the connectors by station identifier.
+        /// </summary>
+        /// <param name="stationId">The station identifier.</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("stations/{stationId}/connectors")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Connector>))]
@@ -33,6 +38,12 @@ namespace GreenFlux.Charging.Group.WebApi
             return Ok(result.Result);
         }
 
+        /// <summary>
+        /// Gets the connector.
+        /// </summary>
+        /// <param name="stationId">The station identifier.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("stations/{stationId}/connectors/{id}")]
         [ProducesResponseType(200, Type = typeof(Connector))]
@@ -51,6 +62,12 @@ namespace GreenFlux.Charging.Group.WebApi
             return Ok(result.Result);
         }
 
+        /// <summary>
+        /// Creates the connector.
+        /// </summary>
+        /// <param name="stationId">The station identifier.</param>
+        /// <param name="createModel">The create model.</param>
+        /// <returns></returns>
         [HttpPost]
         [Route("stations/{stationId}/connectors")]
         [ProducesResponseType(200, Type = typeof(Connector))]
@@ -69,6 +86,13 @@ namespace GreenFlux.Charging.Group.WebApi
             return Ok();
         }
 
+        /// <summary>
+        /// Updates the connector.
+        /// </summary>
+        /// <param name="stationId">The station identifier.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="updateModel">The update model.</param>
+        /// <returns></returns>
         [HttpPut]
         [Route("stations/{stationId}/connectors/{id}")]
         [ProducesResponseType(200, Type = typeof(void))]
@@ -90,6 +114,12 @@ namespace GreenFlux.Charging.Group.WebApi
             return Ok();
         }
 
+        /// <summary>
+        /// Removes the connector.
+        /// </summary>
+        /// <param name="stationId">The station identifier.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("stations/{stationId}/connectors/{id}")]
         [ProducesResponseType(200, Type = typeof(void))]

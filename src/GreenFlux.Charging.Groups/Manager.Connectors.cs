@@ -7,8 +7,20 @@ namespace GreenFlux.Charging.Groups
     using System.Linq;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Manager class encapsulate the business rules for Connectors.
+    /// </summary>
+    /// <seealso cref="GreenFlux.Charging.Groups.IConnectorsManager" />
+    /// <seealso cref="GreenFlux.Charging.Groups.IGroupsManager" />
+    /// <seealso cref="GreenFlux.Charging.Groups.IStationsManager" />
     public partial class Manager : IConnectorsManager
     {
+        /// <summary>
+        /// Gets the connector by id.
+        /// </summary>
+        /// <param name="stationId">The station identifier.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public async Task<ReturnResult<Connector>> GetConnectorById(Guid stationId, int id)
         {
             var station = await this.stationsStore.GetStation(stationId);
@@ -23,6 +35,11 @@ namespace GreenFlux.Charging.Groups
             return ReturnResult<Connector>.SuccessResult(connector);
         }
 
+        /// <summary>
+        /// Gets the connectors by station id.
+        /// </summary>
+        /// <param name="stationId">The station identifier.</param>
+        /// <returns></returns>
         public async Task<ReturnResult<IEnumerable<Connector>>> GetConnectorsByStationId(Guid stationId)
         {
             var station = await this.stationsStore.GetStation(stationId);
@@ -37,6 +54,12 @@ namespace GreenFlux.Charging.Groups
             return ReturnResult<IEnumerable<Connector>>.SuccessResult(connectors);
         }
 
+        /// <summary>
+        /// Creates the connector.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">options</exception>
         public async Task<ReturnResult> CreateConnector(CreateOrUpdateConnectorOptions options)
         {
             if (options == null)
@@ -79,6 +102,13 @@ namespace GreenFlux.Charging.Groups
             return ReturnResult.SuccessResult;
         }
 
+        /// <summary>
+        /// Updates the connector.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="options">The options.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">options</exception>
         public async Task<ReturnResult> UpdateConnector(int id, CreateOrUpdateConnectorOptions options)
         {
             if (options == null)
@@ -148,6 +178,12 @@ namespace GreenFlux.Charging.Groups
             return ReturnResult.SuccessResult;
         }
 
+        /// <summary>
+        /// Removes the connector.
+        /// </summary>
+        /// <param name="stationId">The station identifier.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public async Task<ReturnResult> RemoveConnector(Guid stationId, int id)
         {
             if (id < 1)
@@ -179,6 +215,12 @@ namespace GreenFlux.Charging.Groups
             return ReturnResult.SuccessResult;
         }
 
+        /// <summary>
+        /// Gets the available slot number (1-5).
+        /// </summary>
+        /// <param name="connectors">The connectors.</param>
+        /// <returns></returns>
+        /// <exception cref="System.InvalidOperationException">Unavailable slots for the specified section.</exception>
         private int GetAvailableSlotNumber(IEnumerable<Connector> connectors)
         {
             if (connectors.Any() == false)

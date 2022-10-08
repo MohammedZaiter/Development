@@ -4,8 +4,7 @@ AS
 	SELECT 
 		[Id],
 		[Name],
-		[GroupId],
-		[ConsumedCurrent]
+		[GroupId]
 	FROM
 		[dbo].[Stations]
 	WHERE 

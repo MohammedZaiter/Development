@@ -149,22 +149,26 @@ namespace GreenFlux.Charging.Tests
                 MaxCurrent = 2
             };
 
-            var mockGroupsStore = new Mock<IGroupsStore>();
-            mockGroupsStore.Setup(e => e.GetGroup(guid)).ReturnsAsync(new Group()
+            var group = new Group()
             {
                 Id = Guid.NewGuid(),
                 Capacity = 10,
-                ConsumedCapacity = 10,
                 Name = "group1"
-            });
+            };
+
+            var mockGroupsStore = new Mock<IGroupsStore>();
+            mockGroupsStore.Setup(e => e.GetGroup(group.Id)).ReturnsAsync(group);
 
             var mockStationsStore = new Mock<IStationsStore>();
-            mockStationsStore.Setup(e => e.GetStation(guid)).ReturnsAsync(new Station() { GroupId = guid });
+            mockStationsStore.Setup(e => e.GetStation(guid)).ReturnsAsync(new Station() { GroupId = group.Id });
 
             var mocConnectorsStore = new Mock<IConnectorsStore>();
             mocConnectorsStore.Setup(e => e.GetConnectorsByStationId(guid)).ReturnsAsync(new List<Connector>());
 
-            var manager = new Manager(mockGroupsStore.Object, mockStationsStore.Object, mocConnectorsStore.Object, new Mock<ICachingService>().Object);
+            var mockCachingService = new Mock<ICachingService>();
+            mockCachingService.Setup(e => e.Get<long>($"Groups:{group.Id}:ConsumedCurrent")).ReturnsAsync(10);
+
+            var manager = new Manager(mockGroupsStore.Object, mockStationsStore.Object, mocConnectorsStore.Object, mockCachingService.Object);
 
             var result = manager.CreateConnector(options).Result;
 
@@ -182,22 +186,26 @@ namespace GreenFlux.Charging.Tests
                 MaxCurrent = 2
             };
 
-            var mockGroupsStore = new Mock<IGroupsStore>();
-            mockGroupsStore.Setup(e => e.GetGroup(guid)).ReturnsAsync(new Group()
+            var group = new Group()
             {
                 Id = Guid.NewGuid(),
                 Capacity = 10,
-                ConsumedCapacity = 8,
                 Name = "group1"
-            });
+            };
+
+            var mockGroupsStore = new Mock<IGroupsStore>();
+            mockGroupsStore.Setup(e => e.GetGroup(group.Id)).ReturnsAsync(group);
 
             var mockStationsStore = new Mock<IStationsStore>();
-            mockStationsStore.Setup(e => e.GetStation(guid)).ReturnsAsync(new Station() { GroupId = guid });
+            mockStationsStore.Setup(e => e.GetStation(guid)).ReturnsAsync(new Station() { GroupId = group.Id });
 
             var mocConnectorsStore = new Mock<IConnectorsStore>();
             mocConnectorsStore.Setup(e => e.GetConnectorsByStationId(guid)).ReturnsAsync(new List<Connector>());
 
-            var manager = new Manager(mockGroupsStore.Object, mockStationsStore.Object, mocConnectorsStore.Object, new Mock<ICachingService>().Object);
+            var mockCachingService = new Mock<ICachingService>();
+            mockCachingService.Setup(e => e.Get<long>($"Groups:{group.Id}:ConsumedCurrent")).ReturnsAsync(8);
+
+            var manager = new Manager(mockGroupsStore.Object, mockStationsStore.Object, mocConnectorsStore.Object, mockCachingService.Object);
 
             var result = manager.CreateConnector(options).Result;
 
@@ -285,35 +293,39 @@ namespace GreenFlux.Charging.Tests
         [Fact]
         public void UpdateConnectorsMustFailIfNoEnoughGroupCapacity()
         {
-            var guid = Guid.NewGuid();
+            var stationId = Guid.NewGuid();
 
             var options = new CreateOrUpdateConnectorOptions()
             {
-                StationId = guid,
+                StationId = stationId,
                 MaxCurrent = 4
             };
 
-            var mockGroupsStore = new Mock<IGroupsStore>();
-            mockGroupsStore.Setup(e => e.GetGroup(guid)).ReturnsAsync(new Group()
+            var group = new Group()
             {
                 Id = Guid.NewGuid(),
                 Capacity = 10,
-                ConsumedCapacity = 10,
                 Name = "group1"
-            });
+            };
+
+            var mockGroupsStore = new Mock<IGroupsStore>();
+            mockGroupsStore.Setup(e => e.GetGroup(group.Id)).ReturnsAsync(group);
 
             var mockStationsStore = new Mock<IStationsStore>();
-            mockStationsStore.Setup(e => e.GetStation(guid)).ReturnsAsync(new Station() { GroupId = guid });
+            mockStationsStore.Setup(e => e.GetStation(stationId)).ReturnsAsync(new Station() { GroupId = group.Id });
 
             var mockConnectorsStore = new Mock<IConnectorsStore>();
-            mockConnectorsStore.Setup(e => e.GetConnector(guid, 1)).ReturnsAsync(new Connector()
+            mockConnectorsStore.Setup(e => e.GetConnector(stationId, 1)).ReturnsAsync(new Connector()
             {
                 Id = 1,
-                StationId = guid,
+                StationId = stationId,
                 MaxCurrent = 2
             });
 
-            var manager = new Manager(mockGroupsStore.Object, mockStationsStore.Object, mockConnectorsStore.Object, new Mock<ICachingService>().Object);
+            var mockCachingService = new Mock<ICachingService>();
+            mockCachingService.Setup(e => e.Get<long>($"Groups:{group.Id}:ConsumedCurrent")).ReturnsAsync(10);
+
+            var manager = new Manager(mockGroupsStore.Object, mockStationsStore.Object, mockConnectorsStore.Object, mockCachingService.Object);
 
             var result = manager.UpdateConnector(1, options).Result;
 
@@ -331,17 +343,18 @@ namespace GreenFlux.Charging.Tests
                 MaxCurrent = 1
             };
 
-            var mockGroupsStore = new Mock<IGroupsStore>();
-            mockGroupsStore.Setup(e => e.GetGroup(guid)).ReturnsAsync(new Group()
+            var group = new Group()
             {
                 Id = Guid.NewGuid(),
                 Capacity = 10,
-                ConsumedCapacity = 10,
                 Name = "group1"
-            });
+            };
+
+            var mockGroupsStore = new Mock<IGroupsStore>();
+            mockGroupsStore.Setup(e => e.GetGroup(group.Id)).ReturnsAsync(group);
 
             var mockStationsStore = new Mock<IStationsStore>();
-            mockStationsStore.Setup(e => e.GetStation(guid)).ReturnsAsync(new Station() { GroupId = guid });
+            mockStationsStore.Setup(e => e.GetStation(guid)).ReturnsAsync(new Station() { GroupId = group.Id });
 
             var mockConnectorsStore = new Mock<IConnectorsStore>();
             mockConnectorsStore.Setup(e => e.GetConnector(guid, 1)).ReturnsAsync(new Connector()
@@ -351,7 +364,10 @@ namespace GreenFlux.Charging.Tests
                 MaxCurrent = 2
             });
 
-            var manager = new Manager(mockGroupsStore.Object, mockStationsStore.Object, mockConnectorsStore.Object, new Mock<ICachingService>().Object);
+            var mockCachingService = new Mock<ICachingService>();
+            mockCachingService.Setup(e => e.Get<long>($"Groups:{group.Id}:ConsumedCurrent")).ReturnsAsync(10);
+
+            var manager = new Manager(mockGroupsStore.Object, mockStationsStore.Object, mockConnectorsStore.Object, mockCachingService.Object);
 
             var result = manager.UpdateConnector(1, options).Result;
 

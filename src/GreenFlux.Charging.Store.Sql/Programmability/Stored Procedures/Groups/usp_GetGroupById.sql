@@ -4,8 +4,7 @@ AS
 	SELECT 
 		[Id],
 		[Name],
-		[Capacity],
-		[ConsumedCapacity]
+		[Capacity]
 	FROM
 		[dbo].[Groups]
 	WHERE 

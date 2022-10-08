@@ -81,7 +81,5 @@
     <Build Include="Programmability\Stored Procedures\Stations\usp_GetStationsByGroupId.sql" />
     <Build Include="Programmability\Stored Procedures\Connectors\usp_GetConnectorsByStationId.sql" />
     <Build Include="Programmability\Stored Procedures\Connectors\usp_RemoveConnector.sql" />
-    <Build Include="Programmability\Stored Procedures\Stations\usp_UpdateStationCurrent.sql" />
-    <Build Include="Programmability\Stored Procedures\Groups\usp_UpdateGroupCurrent.sql" />
   </ItemGroup>
 </Project>

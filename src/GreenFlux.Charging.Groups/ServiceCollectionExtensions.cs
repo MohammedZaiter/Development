@@ -6,6 +6,11 @@ namespace Microsoft.Extensions.DependencyInjection
 
     public static class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// Register core services for the system.
+        /// </summary>
+        /// <param name="services">The services.</param>
+        /// <returns></returns>
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             return services

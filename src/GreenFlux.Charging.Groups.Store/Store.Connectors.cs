@@ -9,8 +9,21 @@ namespace GreenFlux.Charging.Groups.Store
     using System.Data.SqlClient;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Store class that encapsulates database operations layer for Connectors.
+    /// </summary>
+    /// <seealso cref="GreenFlux.Charging.Store.DataStore" />
+    /// <seealso cref="GreenFlux.Charging.Groups.IConnectorsStore" />
+    /// <seealso cref="GreenFlux.Charging.Groups.IGroupsStore" />
+    /// <seealso cref="GreenFlux.Charging.Groups.IStationsStore" />
     public partial class Store : DataStore, IConnectorsStore
     {
+        /// <summary>
+        /// Gets the connector.
+        /// </summary>
+        /// <param name="stationId">The station identifier.</param>
+        /// <param name="identifier">The identifier.</param>
+        /// <returns></returns>
         public async Task<Connector> GetConnector(Guid stationId, int identifier)
         {
             var con = await this.connectionManager.GetConnection();
@@ -45,6 +58,11 @@ namespace GreenFlux.Charging.Groups.Store
             }
         }
 
+        /// <summary>
+        /// Gets the connectors by station identifier.
+        /// </summary>
+        /// <param name="stationId">The station identifier.</param>
+        /// <returns></returns>
         public async Task<IEnumerable<Connector>> GetConnectorsByStationId(Guid stationId)
         {
             var con = await this.connectionManager.GetConnection();
@@ -80,6 +98,12 @@ namespace GreenFlux.Charging.Groups.Store
             }
         }
 
+        /// <summary>
+        /// Creates the connector.
+        /// </summary>
+        /// <param name="groupId">The group identifier.</param>
+        /// <param name="identifier"></param>
+        /// <param name="options">The options.</param>
         public async Task CreateConnector(Guid groupId, int identifier, CreateOrUpdateConnectorOptions options)
         {
             var con = await this.connectionManager.GetConnection();
@@ -106,6 +130,13 @@ namespace GreenFlux.Charging.Groups.Store
             }
         }
 
+        /// <summary>
+        /// Updates the connector current.
+        /// </summary>
+        /// <param name="groupId">The group identifier.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="oldCurrent">The old current.</param>
+        /// <param name="options">The options.</param>
         public async Task UpdateConnectorCurrent(Guid groupId, int id, long oldCurrent, CreateOrUpdateConnectorOptions options)
         {
             var con = await this.connectionManager.GetConnection();
@@ -133,6 +164,13 @@ namespace GreenFlux.Charging.Groups.Store
             }
         }
 
+        /// <summary>
+        /// Removes the connector.
+        /// </summary>
+        /// <param name="groupId">The group identifier.</param>
+        /// <param name="stationId">The station identifier.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="oldCurrent">The old current.</param>
         public async Task RemoveConnector(Guid groupId, Guid stationId, int id, long oldCurrent)
         {
             var con = await this.connectionManager.GetConnection();
@@ -158,6 +196,11 @@ namespace GreenFlux.Charging.Groups.Store
             }
         }
 
+        /// <summary>
+        /// Read connector from reader.
+        /// </summary>
+        /// <param name="reader">The reader.</param>
+        /// <returns></returns>
         private Connector ConnectorFromReader(SqlDataReader reader)
         {
             return new Connector()

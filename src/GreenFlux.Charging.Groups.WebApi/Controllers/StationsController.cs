@@ -14,6 +14,11 @@ namespace GreenFlux.Charging.Groups.WebApi
             this.stationsManager = stationsManager ?? throw new ArgumentNullException(nameof(stationsManager));
         }
 
+        /// <summary>
+        /// Gets the station.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("stations/{id}")]
         [ProducesResponseType(200, Type = typeof(Station))]
@@ -30,6 +35,13 @@ namespace GreenFlux.Charging.Groups.WebApi
             return Ok(station);
         }
 
+        /// <summary>
+        /// Updates the station.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="updateModel">The update model.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">updateModel</exception>
         [HttpPut]
         [Route("stations/{id}")]
         [ProducesResponseType(200, Type = typeof(void))]
@@ -53,6 +65,11 @@ namespace GreenFlux.Charging.Groups.WebApi
             return Ok();
         }
 
+        /// <summary>
+        /// Removes the station.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("stations/{id}")]
         [ProducesResponseType(200, Type = typeof(void))]

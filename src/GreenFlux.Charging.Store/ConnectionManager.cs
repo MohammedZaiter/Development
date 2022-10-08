@@ -5,6 +5,10 @@ namespace GreenFlux.Charging.Store
     using System.Data.SqlClient;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Connection manager class to establish and maintain store connection.
+    /// </summary>
+    /// <seealso cref="GreenFlux.Charging.Store.IConnectionManager" />
     public sealed class ConnectionManager : IConnectionManager
     {
         private readonly string connectionString;
@@ -16,6 +20,11 @@ namespace GreenFlux.Charging.Store
             this.connectionString = dataStoreOptions.ConnectionString;
         }
 
+        /// <summary>
+        /// Gets the connection.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="System.ObjectDisposedException">ConnectionManager</exception>
         public async Task<SqlConnection> GetConnection()
         {
             if (this.disposed)
@@ -33,6 +42,9 @@ namespace GreenFlux.Charging.Store
             return this.connection;
         }
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
         public void Dispose()
         {
             this.disposed = true;
