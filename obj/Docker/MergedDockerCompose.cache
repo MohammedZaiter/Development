@@ -8,14 +8,12 @@ services:
       ASPNETCORE_URLS: http://0.0.0.0:3190
       GREENFLUX_CONNECTIONSTRING: Server=20.241.129.190,1433; Initial Catalog=Test;
         User ID=sa; Password=P@ssw0rd; TrustServerCertificate=true;
-      REDIS_CONNECTIONSTRING: http://cache:6379
+      REDIS_CONNECTIONSTRING: redis,abortConnect=False,syncTimeout=4000,connectTimeout=10000
     image: greenflux
     ports:
     - published: 3190
       target: 3190
   redis:
-    environment:
-      ALLOW_EMPTY_PASSWORD: "yes"
     image: redis:6.2-alpine
     ports:
     - published: 6379
