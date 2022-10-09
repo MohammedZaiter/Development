@@ -1,5 +1,5 @@
 ﻿
-namespace GreenFlux.Charging.Group.WebApi
+namespace GreenFlux.Charging.Groups.WebApi
 {
     using GreenFlux.Charging.Groups;
     using GreenFlux.Charging.Groups.WebApi.Models;
