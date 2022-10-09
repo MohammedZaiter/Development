@@ -6,10 +6,37 @@ services:
     build:
       context: .
       dockerfile: src/GreenFlux.Charging.Service/Dockerfile
+    networks:
+      - greenflux_default
+    depends_on:
+      - sqldb
+      - redis
+
+  sqldb:
+    image: "mcr.microsoft.com/mssql/server"
+    volumes: 
+      - sql-data:/sql-data
+    networks:
+      - greenflux_default
+    environment:
+        SA_PASSWORD: "P@ssw0rd"
+        ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
 
   redis:
     image: redis:6.2-alpine
+    volumes: 
+      - redis-data:/redis-data
+    networks:
+      - greenflux_default
+    ports:
+      - '6379:6379'
 
 volumes:
-    cache:
-    driver:
+    sql-data:
+    redis-data:
+
+networks:
+  greenflux_default:
+    external: true

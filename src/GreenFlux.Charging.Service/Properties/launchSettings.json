@@ -21,16 +21,22 @@
     },
     "IIS Express": {
       "commandName": "IISExpress",
+      "commandLineArgs": "-m setup",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "GREENFLUX_CONNECTIONSTRING": "server=localhost,1433; Initial Catalog=greenflux; User ID=sa; Password=P@ssw0rd;TrustServerCertificate=true;"
       }
     },
     "Docker": {
       "commandName": "Docker",
+      "commandLineArgs": "-m setup",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "environmentVariables": {
+        "GREENFLUX_CONNECTIONSTRING": "server=localhost,1433; Initial Catalog=greenflux; User ID=sa; Password=P@ssw0rd;"
+      },
       "publishAllPorts": true,
       "useSSL": true
     }

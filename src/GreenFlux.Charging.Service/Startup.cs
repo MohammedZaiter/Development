@@ -3,8 +3,6 @@ namespace Charging.Group.Service
 {
     using GreenFlux.Charging.Caching.Redis;
     using GreenFlux.Charging.Store;
-    using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-    using Microsoft.Extensions.Diagnostics.HealthChecks;
     using Microsoft.OpenApi.Models;
 
     public sealed class Startup
