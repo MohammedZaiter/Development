@@ -13,29 +13,10 @@ namespace GreenFlux.Charging.Caching.Redis
     public sealed class RedisCache : ICachingService
     {
         private readonly IConnectionMultiplexer connectionMultiplexer;
-        private readonly string instance;
 
         public RedisCache(string connectionString)
         {
             this.connectionMultiplexer = ConnectionMultiplexer.Connect(connectionString);
-        }
-
-        /// <summary>
-        /// Keys the exists.
-        /// </summary>
-        /// <param name="key">The key.</param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException">key</exception>
-        public async Task<bool> KeyExists(string key)
-        {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            var db = this.GetDatabase();
-
-            return await db.KeyExistsAsync($"{instance}:{key}");
         }
 
         /// <summary>

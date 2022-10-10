@@ -9,13 +9,6 @@ namespace GreenFlux.Charging.Abstractions
     public interface ICachingService
     {
         /// <summary>
-        /// Keys the exists.
-        /// </summary>
-        /// <param name="key">The key.</param>
-        /// <returns></returns>
-        Task<bool> KeyExists(string key);
-
-        /// <summary>
         /// Gets the specified key.
         /// </summary>
         /// <typeparam name="T"></typeparam>
