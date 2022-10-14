@@ -1,6 +1,6 @@
 # Introduction
 
-This is the **GreenFlux Charging Service** (.NET CORE), with the following structure:
+This is the **GreenSystem Charging Service** (.NET CORE), with the following structure:
 
 - **Common Folder:** Conatins a list of projects that are used by different solution projects (Common classes, interfaces, and caching service (Redis)).
 - **Store:** Contains the common resources and operations that we apply to the database.
@@ -15,8 +15,8 @@ We need docker desktop configured and running on the machine (Windows).
 
 **Docker Compose Services:**
 
-- **greenflux**: Web api service that hosts controllers.
-- **sqldb**: SQL database container instance to store the data (Alternatively, you can use your own server by modifying the **GREENFLUX_CONNECTIONSTRING** environment variable in docker-compose).
+- **greenSystem**: Web api service that hosts controllers.
+- **sqldb**: SQL database container instance to store the data (Alternatively, you can use your own server by modifying the **GREENSYSTEM_CONNECTIONSTRING** environment variable in docker-compose).
 - **redis**: Redis container instance is used for caching and to minimize database interactions.
 
 ## Compile And Run:
