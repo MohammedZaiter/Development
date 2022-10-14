@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  greenSystem:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:3190
+      - GREENSYSTEM_CONNECTIONSTRING=Server=sqldb,1433; Initial Catalog=greenSystem; User ID=sa; Password=P@ssw0rd;
+      - REDIS_CONNECTIONSTRING=redis,abortConnect=False,syncTimeout=4000,connectTimeout=10000
+    ports:
+      - "3190:3190"
